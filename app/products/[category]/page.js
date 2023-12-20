@@ -1,7 +1,6 @@
-import ProductCard from "@/components/products/ProductCard";
 import ProductList from "@/components/products/ProductList";
 import { Suspense } from "react";
-import { BeatLoader, ClimbingBoxLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 export const generateMetadata = async ({ params }) => {
 	return {

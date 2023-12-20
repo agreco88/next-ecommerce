@@ -6,7 +6,6 @@ import Image from "next/image";
 
 const ProductDetail = ({ selectedProduct }) => {
 	const { addToCart } = useCartContext();
-
 	return (
 		<>
 			<div className="col-span-1 self-center flex flex-col gap-8 flex-grow h-full justify-center py-8 md:py-0">
@@ -25,7 +24,7 @@ const ProductDetail = ({ selectedProduct }) => {
 			</div>
 			<Image
 				alt={selectedProduct.title}
-				src={`/img/products/${selectedProduct.image}`}
+				src={selectedProduct.image}
 				width={400}
 				height={400}
 				className="w-full h-auto rounded"

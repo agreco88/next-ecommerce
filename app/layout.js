@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/contexts/CartContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +18,15 @@ export default function RootLayout({ children }) {
 			<body
 				className={`${inter.className} flex flex-col container mx-auto`}
 			>
-				<CartProvider>
-					<Header />
-					<main className="flex min-h-[80vh] overflow-scroll flex-col items-center  px-5 md:px-0">
-						{children}
-					</main>
-					{/* <Footer /> */}
-				</CartProvider>
+				<AuthProvider>
+					<CartProvider>
+						<Header />
+						<main className="flex min-h-[80vh] overflow-scroll flex-col items-center  px-5 md:px-0">
+							{children}
+						</main>
+						{/* <Footer /> */}
+					</CartProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);

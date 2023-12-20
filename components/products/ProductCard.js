@@ -15,17 +15,19 @@ const ProductCard = ({ product }) => {
 
 	return (
 		<article className="border border-gray-600 flex flex-col gap-4 p-8 rounded-md">
-			<Link href={`/products/detail/${product.slug}`} className="">
+			<Link href={`/products/detail/${product.slug}`}>
 				<Image
 					alt={product.title}
-					src={`/img/products/${product.image}`}
-					width={400}
-					height={400}
-					className="w-full h-auto md:h-44 rounded"
+					src={product.image}
+					width={640}
+					height={640}
+					className="rounded"
 				/>
 			</Link>
 
-			<h4 className="text-sm truncate">{product.title}</h4>
+			<h4 className="text-sm truncate font-bold uppercase">
+				{product.title}
+			</h4>
 			<p className="text-2xl font-semibold">${product.price}</p>
 			<div className="flex justify-between">
 				<PrimaryButton

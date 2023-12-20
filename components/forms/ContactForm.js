@@ -23,8 +23,6 @@ const ContactForm = () => {
 			method: "POST",
 			body: JSON.stringify(values),
 		}).then((r) => r.json());
-
-		console.log(response);
 	};
 
 	return (

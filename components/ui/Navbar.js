@@ -1,17 +1,21 @@
 "use client";
+import { useAuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Navbar = ({ orientation = "horizontal", navbarOptions = [] }) => {
+const Navbar = ({
+	orientation = "vertical",
+	navbarOptions = [],
+	textColor = "white",
+}) => {
 	const pathname = usePathname();
+	const { user } = useAuthContext();
 
 	return (
 		<nav className="flex">
 			<ul
-				className={`flex justify-between md:justify-start w-full ${
-					orientation === "vertical"
-						? "flex-row md:flex-col"
-						: "flex-col md:flex-row"
+				className={`text-${textColor} flex justify-between md:justify-start w-full ${
+					orientation === "vertical" ? "flex-col" : "flex-row"
 				} gap-8`}
 			>
 				{navbarOptions.map((navbarOption) => (
@@ -34,6 +38,22 @@ const Navbar = ({ orientation = "horizontal", navbarOptions = [] }) => {
 						</Link>
 					</li>
 				))}
+				{user.logged && orientation != "vertical" ? (
+					<li key="adminPageHref">
+						{/* Condition to make it so that only the exact home route and the routes starting with /products/ are bolded, 
+						as well as other routes according to their respective conditions. */}
+						<Link
+							className={`${
+								pathname.startsWith("/admin")
+									? "opacity-100"
+									: "opacity-50"
+							}`}
+							href={"/admin"}
+						>
+							Dashboard
+						</Link>
+					</li>
+				) : null}
 			</ul>
 		</nav>
 	);

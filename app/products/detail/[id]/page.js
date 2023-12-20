@@ -12,7 +12,6 @@ const ProductDetailPage = async ({ params }) => {
 	const { id } = params;
 
 	const selectedProduct = await getProductDetail(id);
-
 	return (
 		<div className="grid md:grid-cols-2 h-full items-center md:mt-20 2xl:mt-48">
 			<ProductDetail selectedProduct={selectedProduct} />

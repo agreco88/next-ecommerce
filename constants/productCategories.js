@@ -5,8 +5,8 @@ const productCategories = [
 		desc: "Find in-depth information about Next.js features and API.",
 	},
 	{
-		href: "/products/tvs",
-		title: "TVs",
+		href: "/products/monitors",
+		title: "Monitors",
 		desc: "Find in-depth information about Next.js features and API.",
 	},
 	{

@@ -5,7 +5,7 @@ export const PrimaryButton = ({
 	...args
 }) => (
 	<button
-		className={`py-2 px-4 flex bg-transparent border border-gray-600 group hover:bg-gray-400 text-white hover:text-gray-800 justify-center min-w-[2.5rem] rounded-md min-h-[2.5rem] items-center transition-all duration-400 ${className}`}
+		className={`py-2 uppercase px-4 flex bg-transparent border border-gray-600 group hover:bg-gray-400 text-white hover:text-gray-800 justify-center min-w-[2.5rem] rounded-md min-h-[2.5rem] items-center transition-all duration-400 ${className}`}
 		{...args}
 		disabled={isDisabled}
 	>
