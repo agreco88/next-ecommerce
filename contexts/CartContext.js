@@ -10,12 +10,12 @@ export const CartProvider = ({ children }) => {
 
 	const addToCart = (product) => {
 		// Check if the product is already in the cart
-		const existingProduct = cart.find((item) => item.id === product.id);
+		const existingProduct = cart.find((item) => item.slug === product.slug);
 
 		if (existingProduct) {
 			// If the product is already in the cart, update the quantity
 			const updatedCart = cart.map((item) =>
-				item.id === product.id
+				item.slug === product.slug
 					? { ...item, quantity: item.quantity + 1 }
 					: item
 			);
@@ -28,12 +28,12 @@ export const CartProvider = ({ children }) => {
 
 	const decrementQuantity = (productId) => {
 		// Find the product in the cart
-		const productToRemove = cart.find((item) => item.id === productId);
+		const productToRemove = cart.find((item) => item.slug === productId);
 
 		if (productToRemove) {
 			// If the product is found, decrease the quantity
 			const updatedCart = cart.map((item) =>
-				item.id === productId
+				item.slug === productId
 					? { ...item, quantity: item.quantity - 1 }
 					: item
 			);
@@ -47,8 +47,10 @@ export const CartProvider = ({ children }) => {
 		}
 	};
 
-	const removeItem = (productId) => {
-		setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+	const removeItem = (productSlug) => {
+		setCart((prevCart) =>
+			prevCart.filter((item) => item.slug !== productSlug)
+		);
 	};
 
 	const calculateTotalItems = () => {

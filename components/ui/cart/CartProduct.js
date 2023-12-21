@@ -3,47 +3,46 @@ import React from "react";
 import Image from "next/image";
 import { SecondaryButton } from "../Button";
 import { useCartContext } from "@/contexts/CartContext";
+import { IoMdAdd, IoMdRemove, IoMdTrash } from "react-icons/io";
 
 const CartProduct = ({ product }) => {
 	const { addToCart, decrementQuantity, removeItem } = useCartContext();
 
 	return (
-		<div className="flex flex-col gap-4 text-black md:text-white justify-between h-full border border-gray-400 shadow-lg shadow-gray-200 p-4 rounded-md">
-			<div className="flex gap-2 items-center">
-				<div className="flex flex-col  gap-2 w-full">
-					<h5 className="md:truncate "> {product.title}</h5>
-					<p>${product.price}</p>
-					<p>Quantity:{product.quantity}</p>
+		<tr className="hover:bg-gray-50 !w-full flex-grow">
+			<td className="w-6/12 truncate overflow-hidden grow pl-4 py-4 whitespace-nowrap">
+				{product.title}
+			</td>
+			<td className="w-1/12 py-4 whitespace-nowrap">
+				{product.quantity}
+			</td>
+			<td className="w-1/12 py-4 whitespace-nowrap">${product.price}</td>
+			<td className="w-1/12 py-4 whitespace-nowrap">
+				${product.price * product.quantity}
+			</td>
+			<td className="w-3/12 ">
+				<div className="flex items-center justify-center gap-4 whitespace-nowrap">
+					<button>
+						<IoMdAdd
+							className="w-5 h-5"
+							onClick={() => addToCart(product)}
+						/>
+					</button>
+					<button>
+						<IoMdRemove
+							className="w-5 h-5"
+							onClick={() => decrementQuantity(product.slug)}
+						/>
+					</button>
+					<button>
+						<IoMdTrash
+							className="w-5 h-5"
+							onClick={() => removeItem(product.slug)}
+						/>
+					</button>
 				</div>
-				<Image
-					alt={product.title}
-					src={`/img/products/${product.image}`}
-					width={50}
-					height={50}
-					className="w-1/4 h-1/2 md:w-full md:h-auto rounded"
-				/>
-			</div>
-			<div className="flex justify-between gap-5">
-				<SecondaryButton
-					className="w-full"
-					onClick={() => addToCart(product)}
-				>
-					+
-				</SecondaryButton>
-				<SecondaryButton
-					className="w-full"
-					onClick={() => decrementQuantity(product.id)}
-				>
-					-
-				</SecondaryButton>
-				<SecondaryButton
-					className="w-full"
-					onClick={() => removeItem(product.id)}
-				>
-					Remove
-				</SecondaryButton>
-			</div>
-		</div>
+			</td>
+		</tr>
 	);
 };
 

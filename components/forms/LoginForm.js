@@ -5,7 +5,7 @@ import PrimaryButton from "../ui/Button";
 
 const LoginForm = () => {
 	// const { registerUser, loginUser, googleLogin } = useAuthContext();
-	const { createUser, loginUser } = useAuthContext();
+	const { createUser, loginUser, loginGoogle } = useAuthContext();
 	const [values, setValues] = useState({
 		email: "",
 		password: "",
@@ -58,7 +58,7 @@ const LoginForm = () => {
 				>
 					Create new user
 				</PrimaryButton>
-				<PrimaryButton onClick={null} className="!bg-red-500">
+				<PrimaryButton onClick={loginGoogle} className="!bg-red-500">
 					Google
 				</PrimaryButton>
 			</div>

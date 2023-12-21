@@ -24,7 +24,10 @@ const MobileCart = ({ onClose }) => {
 			</p>
 			<ul className="bg-red-900 py-4 gap-8 h-full flex flex-col">
 				{cart.map((cartItem) => (
-					<li className="text-red-200 bg-red-700 w-full">
+					<li
+						key={cartItem.slug}
+						className="text-red-200 bg-red-700 w-full"
+					>
 						<MobileCartProduct product={cartItem} />
 					</li>
 				))}

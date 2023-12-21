@@ -5,18 +5,18 @@ const productCategories = [
 		desc: "Find in-depth information about Next.js features and API.",
 	},
 	{
-		href: "/products/monitors",
-		title: "Monitors",
+		href: "/products/gaming",
+		title: "Gaming",
 		desc: "Find in-depth information about Next.js features and API.",
 	},
 	{
-		href: "/products/hornos",
-		title: "Hornos",
+		href: "/products/office",
+		title: "Office",
 		desc: "Explore starter templates for Next.js features and API.",
 	},
 	{
-		href: "/products/aires",
-		title: "Aires",
+		href: "/products/ultrawide",
+		title: "Ultrawide",
 		desc: "Instantly deploy your Next.js site to a shareable URL with Vercel.",
 	},
 ];

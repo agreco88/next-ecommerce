@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
 	};
 
 	return (
-		<article className="border border-gray-600 flex flex-col gap-4 p-8 rounded-md">
+		<article className="border border-gray-600 flex flex-col gap-4 p-4 rounded-md">
 			<Link href={`/products/detail/${product.slug}`}>
 				<Image
 					alt={product.title}
@@ -29,19 +29,19 @@ const ProductCard = ({ product }) => {
 				{product.title}
 			</h4>
 			<p className="text-2xl font-semibold">${product.price}</p>
-			<div className="flex justify-between">
-				<PrimaryButton
-					className="bg-gray-400"
-					onClick={() => addToCart(product)}
-				>
-					Add to cart
-				</PrimaryButton>
+			<div className="flex flex-col justify-between gap-2">
 				<SecondaryButton
 					onClick={() => handleNavigation(product.slug)}
 					className="bg-gray-600"
 				>
 					More info
 				</SecondaryButton>
+				<PrimaryButton
+					className="bg-gray-400"
+					onClick={() => addToCart(product)}
+				>
+					Add to cart
+				</PrimaryButton>
 			</div>
 		</article>
 	);
