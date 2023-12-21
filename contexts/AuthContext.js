@@ -1,5 +1,5 @@
 "use client";
-import { auth } from "@/firebase/config";
+import { auth, db } from "@/firebase/config";
 import {
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
@@ -8,6 +8,8 @@ import {
 	signInWithPopup,
 	signOut,
 } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -23,12 +25,31 @@ export const AuthProvider = ({ children }) => {
 		uid: null,
 	});
 
+	const router = useRouter();
+
 	const createUser = async (values) => {
-		await createUserWithEmailAndPassword(
-			auth,
-			values.email,
-			values.password
-		);
+		try {
+			// Create the user in Firebase Authentication
+			const userCredential = await createUserWithEmailAndPassword(
+				auth,
+				values.email,
+				values.password
+			);
+
+			// Access the newly created user
+			const newUser = userCredential.user;
+
+			// Set the default role for the new user in Firestore
+			const userDocRef = doc(db, "roles", newUser.uid);
+			await setDoc(userDocRef, {
+				email: values.email,
+				role: "user", // Set the default role to "user"
+			});
+
+			console.log("User created successfully!");
+		} catch (error) {
+			console.error("Error creating user:", error.message);
+		}
 	};
 
 	const loginUser = async (values) => {
@@ -44,22 +65,38 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
+		onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				setUser({
-					logged: true,
-					email: user.email,
-					uid: user.uid,
-				});
+				const docRef = doc(db, "roles", user.uid);
+				const userDoc = await getDoc(docRef);
+
+				if (userDoc.data()?.role === "admin") {
+					setUser({
+						logged: true,
+						email: user.email,
+						uid: user.uid,
+						role: "admin",
+					});
+					router.push("/admin");
+				} else {
+					setUser({
+						logged: true,
+						email: user.email,
+						uid: user.uid,
+						role: "user",
+					});
+					router.push("/");
+				}
 			} else {
 				setUser({
 					logged: false,
-					email: null,
+					emaiL: null,
 					uid: null,
 				});
+				router.push("/");
 			}
 		});
-	}, []);
+	}, [router]);
 
 	return (
 		<AuthContext.Provider

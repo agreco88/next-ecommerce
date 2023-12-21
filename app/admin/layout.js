@@ -3,7 +3,6 @@ import { useAuthContext } from "@/contexts/AuthContext";
 
 const AdminLayout = ({ children, login }) => {
 	const { user } = useAuthContext();
-	console.log(user);
 	return (
 		<section className="flex flex-col gap-4 container mx-auto">
 			<h2 className="text-4xl text- font-thin mt-8">

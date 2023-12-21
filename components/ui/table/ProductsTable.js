@@ -14,6 +14,7 @@ const getAllProducts = async () => {
 
 const ProductsTable = async () => {
 	const products = await getAllProducts();
+
 	return (
 		<table className="w-full text-xs text-left text-black bg-gray-50 rounded">
 			<thead className="text-xs uppercase">
@@ -72,6 +73,56 @@ const ProductsTable = async () => {
 							</td>
 							<td className="pr-3">
 								<div className="flex gap-2">
+									<Link href={`/admin/edit/${product.slug}`}>
+										<ButtonWithIcon
+											className="opacity-75 hover:opacity-100 border-lime-500 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-300 via-lime-400 to-lime-500"
+											icon={<FaRegEdit />}
+										>
+											Edit
+										</ButtonWithIcon>
+									</Link>
+									<DeleteButton product={product} />
+								</div>
+							</td>
+						</tr>
+					))
+				) : (
+					<div className="h-60 flex items-center justify-center">
+						Loading items
+					</div>
+				)}
+			</tbody>
+		</table>
+	);
+};
+
+export const MobileProductsTable = async () => {
+	const products = await getAllProducts();
+
+	return (
+		<table className="w-full text-xs text-left text-black bg-gray-50 rounded">
+			<thead className="text-xs uppercase">
+				<tr className="border-b">
+					<th scope="col" className="p-2 text-center">
+						Name
+					</th>
+					<th scope="col" className="text-center">
+						Price
+					</th>
+					<th scope="col" className=" text-center">
+						Actions
+					</th>
+				</tr>
+			</thead>
+			<tbody className="w-full text-xs text-left relative">
+				{products.length > 0 ? (
+					products.map((product) => (
+						<tr key={product.slug}>
+							<td className="uppercase p-2">{product.title}</td>
+							<td className="">${product.price}</td>
+
+							<td className=" w-1/3 pl-2">
+								<div className="flex gap-1">
 									<Link href={`/admin/edit/${product.slug}`}>
 										<ButtonWithIcon
 											className="opacity-75 hover:opacity-100 border-lime-500 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-lime-300 via-lime-400 to-lime-500"

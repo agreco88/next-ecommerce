@@ -3,7 +3,6 @@ import Navbar from "../ui/Navbar";
 import { MobileLogo } from "../ui/Logo";
 import MobileHamburguerButton from "./MobileHamburgerButton";
 import headerNavbarOptions from "@/constants/headerNavbarOptions";
-import Cart from "../ui/cart/Cart";
 import MobileCart from "../ui/cart/MobileCart";
 
 const MobileSidebar = ({ isOpen, onClose }) => {

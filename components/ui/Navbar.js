@@ -10,7 +10,6 @@ const Navbar = ({
 }) => {
 	const pathname = usePathname();
 	const { user } = useAuthContext();
-
 	return (
 		<nav className="flex">
 			<ul
@@ -38,22 +37,38 @@ const Navbar = ({
 						</Link>
 					</li>
 				))}
-				{user.logged && orientation != "vertical" ? (
-					<li key="adminPageHref">
-						{/* Condition to make it so that only the exact home route and the routes starting with /products/ are bolded, 
-						as well as other routes according to their respective conditions. */}
-						<Link
-							className={`${
-								pathname.startsWith("/admin")
-									? "opacity-100"
-									: "opacity-50"
-							}`}
-							href={"/admin"}
-						>
-							Dashboard
-						</Link>
-					</li>
-				) : null}
+				{user.logged &&
+					user.role === "admin" &&
+					orientation != "vertical" && (
+						<li key="adminPageHref">
+							<Link
+								className={`${
+									pathname.startsWith("/admin")
+										? "opacity-100"
+										: "opacity-50"
+								}`}
+								href={"/admin"}
+							>
+								Dashboard
+							</Link>
+						</li>
+					)}
+				{user.logged &&
+					user.role === "user" &&
+					orientation != "vertical" && (
+						<li key="userPageHref">
+							<Link
+								className={`${
+									pathname.startsWith("/profile")
+										? "opacity-100"
+										: "opacity-50"
+								}`}
+								href={"/profile"}
+							>
+								Profile
+							</Link>
+						</li>
+					)}
 			</ul>
 		</nav>
 	);

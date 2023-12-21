@@ -23,13 +23,13 @@ const MobileCartProduct = ({ product }) => {
 				</SecondaryButton>
 				<SecondaryButton
 					className="w-full"
-					onClick={() => decrementQuantity(product.id)}
+					onClick={() => decrementQuantity(product.slug)}
 				>
 					-
 				</SecondaryButton>
 				<SecondaryButton
 					className="w-full"
-					onClick={() => removeItem(product.id)}
+					onClick={() => removeItem(product.slug)}
 				>
 					<FaRegTrashAlt />
 				</SecondaryButton>

@@ -1,4 +1,6 @@
-import ProductsTable from "@/components/ui/table/ProductsTable";
+import ProductsTable, {
+	MobileProductsTable,
+} from "@/components/ui/table/ProductsTable";
 import Link from "next/link";
 import React from "react";
 
@@ -8,6 +10,9 @@ const AdminPage = () => {
 			<h2 className="text-start">Products list</h2>
 			<section className="hidden md:flex">
 				<ProductsTable />
+			</section>
+			<section className="flex md:hidden">
+				<MobileProductsTable />
 			</section>
 			<Link
 				href={"/admin/create"}

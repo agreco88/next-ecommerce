@@ -44,8 +44,6 @@ const EditForm = ({ item }) => {
 	const [hasError, setHasError] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 
-	console.log(file);
-
 	const handleChange = (e) => {
 		setValues({
 			...values,
